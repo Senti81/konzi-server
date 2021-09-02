@@ -14,6 +14,3 @@ app.use(cors())
 app.listen(port, () => {
   console.log('Server is running on port ' + port)
 })
-
-const moment = require('moment-timezone');
-const dateEurope = moment.tz(Date.now(), 'Europe/Berlin');

@@ -4,7 +4,8 @@
   "description": "Backend for Konzi App",
   "main": "index.js",
   "scripts": {
-    "dev": "nodemon main.js"
+    "dev": "nodemon main.js",
+    "start": "nodem main.js"
   },
   "author": "Senti",
   "license": "ISC",

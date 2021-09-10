@@ -1,8 +1,9 @@
 const express = require('express')
 const Event = require('../models/Event')
+const auth = require ('../middleware/auth')
 const router = express.Router()
 
-router.get('/events', async (req, res) => {
+router.get('/events', auth, async (req, res) => {
   const limit = req.query.limit ? parseInt(req.query.limit) : 0
   const skip = req.query.skip ? parseInt(req.query.skip) : 0
   try {
@@ -16,7 +17,7 @@ router.get('/events', async (req, res) => {
   }
 })
 
-router.get('/events/:id', async (req, res) => {
+router.get('/events/:id', auth, async (req, res) => {
   try {
     const result = await Event.findById(req.params.id)
     if (!result)
@@ -27,7 +28,7 @@ router.get('/events/:id', async (req, res) => {
   }
 })
 
-router.post('/events', async (req, res) => {
+router.post('/events', auth, async (req, res) => {
   const event = new Event(req.body)
   try {
     await event.save()
@@ -37,7 +38,7 @@ router.post('/events', async (req, res) => {
   }
 })
 
-router.put('/events/:id', async (req, res) => {
+router.put('/events/:id', auth, async (req, res) => {
   const updates = Object.keys(req.body)
 
   try {
@@ -53,7 +54,7 @@ router.put('/events/:id', async (req, res) => {
   }
 })
 
-router.delete('/events/:id', async (req, res) => {
+router.delete('/events/:id', auth, async (req, res) => {
   try {
     const result = await Event.findByIdAndDelete(req.params.id)
     if(!result)

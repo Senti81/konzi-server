@@ -4,6 +4,10 @@ const auth = require ('../middleware/auth')
 const router = express.Router()
 
 router.get('/events', auth, async (req, res) => {
+  if (req.query.count) {
+    const count = await Event.count()
+    return res.send({ count })
+  }
   const limit = req.query.limit ? parseInt(req.query.limit) : 0
   const skip = req.query.skip ? parseInt(req.query.skip) : 0
   try {

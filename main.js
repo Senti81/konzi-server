@@ -13,6 +13,15 @@ app.use(express.json())
 app.use(eventRouter)
 app.use(userRouter)
 
+app.get('*', (req, res) =>{
+  res.status(404).json(
+    {
+      error: 404,
+      message: "Site not found"
+    }
+  );
+});
+
 app.listen(port, () => {
   console.log('Server is running on port ' + port)
 })
